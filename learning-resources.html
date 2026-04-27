@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning Resources & Pathways – MTTS Overture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #1a2744; --teal: #1e7a6e; --gold: #d4a017; --cream: #fdf8f0;
+      --light-teal: #e8f5f3; --light-gold: #fef9ec; --light-blue: #eef3fb;
+      --text: #2c3e50; --muted: #6b7c93; --border: #dde3ec; --white: #ffffff;
+      --red: #c0392b; --light-red: #fdf2f0; --purple: #6c3483; --light-purple: #f4ecfb;
+      --green: #1e7a3a; --light-green: #eafaf1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; }
+
+    nav { background: var(--navy); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.3); }
+    .nav-brand { color: var(--white); font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; padding: 1rem 0; text-decoration: none; }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; gap: .25rem; }
+    .nav-links a { color: rgba(255,255,255,.8); text-decoration: none; font-size: .85rem; font-weight: 600; padding: .5rem .9rem; border-radius: 4px; transition: background .2s; }
+    .nav-links a:hover, .nav-links a.active { background: var(--teal); color: #fff; }
+
+    .page-header { background: linear-gradient(135deg, var(--navy) 0%, #22406e 60%, #1e7a6e 100%); color: white; padding: 4rem 2rem 3rem; text-align: center; }
+    .badge { display: inline-block; background: var(--gold); color: var(--navy); font-size: .75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: .3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem; }
+    .page-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: .8rem; }
+    .page-header h1 span { color: var(--gold); }
+    .page-header p { max-width: 640px; margin: 0 auto; opacity: .8; font-size: 1.05rem; }
+
+    .tab-nav { background: var(--white); border-bottom: 2px solid var(--border); position: sticky; top: 57px; z-index: 90; }
+    .tab-nav-inner { max-width: 1080px; margin: 0 auto; display: flex; overflow-x: auto; padding: 0 1rem; }
+    .tab-nav-inner::-webkit-scrollbar { display: none; }
+    .tab-link { display: flex; align-items: center; gap: .4rem; color: var(--muted); text-decoration: none; font-size: .85rem; font-weight: 700; padding: .9rem 1rem; border-bottom: 3px solid transparent; white-space: nowrap; transition: all .2s; flex-shrink: 0; }
+    .tab-link:hover { color: var(--navy); border-bottom-color: var(--border); }
+    .tab-link.active { color: var(--teal); border-bottom-color: var(--teal); }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 3rem 2rem; }
+    .page-section { margin-bottom: 4rem; scroll-margin-top: 115px; }
+    .section-label { font-size: .72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--teal); margin-bottom: .4rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 700; color: var(--navy); margin-bottom: .6rem; }
+    .section-desc { color: var(--muted); margin-bottom: 2rem; font-size: 1rem; max-width: 700px; line-height: 1.7; }
+
+    /* EXAM CARDS */
+    .exam-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,.05); transition: box-shadow .2s; }
+    .exam-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.1); }
+    .exam-header { display: flex; align-items: center; gap: 1rem; padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border); }
+    .exam-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+    .exam-icon.jam { background: var(--light-red); }
+    .exam-icon.cuet { background: var(--light-blue); }
+    .exam-icon.cmi { background: var(--light-gold); }
+    .exam-icon.isi { background: var(--light-green); }
+    .exam-icon.iiser { background: var(--light-teal); }
+    .exam-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--navy); }
+    .exam-subtitle { font-size: .85rem; color: var(--muted); }
+    .exam-body { padding: 1.4rem 1.5rem; }
+    .exam-body p { font-size: .95rem; color: var(--text); margin-bottom: 1rem; }
+
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: .8rem; margin-bottom: 1.2rem; }
+    .info-pill { background: var(--cream); border: 1px solid var(--border); border-radius: 8px; padding: .6rem .9rem; }
+    .info-pill .lbl { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: .2rem; }
+    .info-pill .val { font-size: .9rem; font-weight: 700; color: var(--navy); }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+    .tag { font-size: .78rem; font-weight: 700; padding: .25rem .7rem; border-radius: 20px; }
+    .tag.green { background: var(--light-green); color: var(--green); }
+    .tag.blue { background: var(--light-blue); color: #1a4a8a; }
+    .tag.gold { background: var(--light-gold); color: #8a5c00; }
+    .tag.purple { background: var(--light-purple); color: var(--purple); }
+    .tag.red { background: var(--light-red); color: var(--red); }
+    .tag.teal { background: var(--light-teal); color: var(--teal); }
+
+    .exam-link { display: inline-flex; align-items: center; gap: .4rem; color: var(--teal); font-size: .85rem; font-weight: 700; text-decoration: none; border: 1.5px solid var(--teal); border-radius: 6px; padding: .35rem .9rem; transition: all .2s; }
+    .exam-link:hover { background: var(--teal); color: white; }
+
+    /* STIPEND */
+    .stipend-box { background: linear-gradient(135deg, var(--navy) 0%, #22406e 100%); color: white; border-radius: 10px; padding: 1.2rem 1.5rem; margin-bottom: 1.2rem; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .stipend-item { text-align: center; flex: 1; min-width: 110px; }
+    .stipend-amt { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); }
+    .stipend-lbl { font-size: .78rem; opacity: .8; margin-top: .2rem; }
+
+    /* COLLEGES */
+    .colleges-intro { background: var(--light-teal); border-left: 4px solid var(--teal); border-radius: 0 10px 10px 0; padding: 1rem 1.4rem; margin-bottom: 1.8rem; font-size: .93rem; color: var(--teal); font-weight: 600; }
+    .college-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+    .college-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.3rem; display: flex; gap: .9rem; align-items: flex-start; transition: border-color .2s, box-shadow .2s; }
+    .college-card:hover { border-color: var(--teal); box-shadow: 0 4px 16px rgba(30,122,110,.1); }
+    .college-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+    .college-dot.iit { background: var(--red); }
+    .college-dot.iiser { background: var(--teal); }
+    .college-dot.central { background: var(--purple); }
+    .college-dot.special { background: var(--gold); }
+    .college-name { font-weight: 700; font-size: .92rem; color: var(--navy); margin-bottom: .2rem; line-height: 1.4; }
+    .college-detail { font-size: .82rem; color: var(--muted); }
+    .college-exam { font-size: .78rem; font-weight: 700; color: var(--teal); margin-top: .3rem; }
+
+    /* FELLOWSHIPS */
+    .fellowship-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .fellowship-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; transition: border-color .2s, box-shadow .2s; }
+    .fellowship-card:hover { border-color: var(--gold); box-shadow: 0 4px 16px rgba(212,160,23,.1); }
+    .fellowship-header { display: flex; align-items: flex-start; gap: .8rem; margin-bottom: 1rem; }
+    .f-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .f-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--navy); line-height: 1.3; }
+    .f-org { font-size: .8rem; color: var(--muted); margin-top: .15rem; }
+    .fellowship-card p { font-size: .88rem; color: var(--text); margin-bottom: .8rem; }
+
+    /* SUMMER SCHOOLS */
+    .summer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.2rem; }
+    .summer-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color .2s, box-shadow .2s; }
+    .summer-card:hover { border-color: var(--teal); box-shadow: 0 4px 20px rgba(30,122,110,.1); }
+    .sch { padding: 1rem 1.3rem; color: white; }
+    .sch.mtts { background: linear-gradient(135deg, #d4a017, #a07a0e); color: var(--navy); }
+    .sch.tifr { background: linear-gradient(135deg, #1a2744, #2e5da8); }
+    .sch.icts { background: linear-gradient(135deg, #1e7a6e, #145c52); }
+    .sch.hri  { background: linear-gradient(135deg, #6c3483, #4a235a); }
+    .sch.imsc { background: linear-gradient(135deg, #c0392b, #922b21); }
+    .sch.cam  { background: linear-gradient(135deg, #1e7a3a, #155228); }
+    .sch.atm  { background: linear-gradient(135deg, #2e4057, #1a2535); }
+    .sch.init { background: linear-gradient(135deg, #2e5da8, #1a3a7a); }
+    .sch-h { font-weight: 800; font-size: .95rem; margin-bottom: .15rem; }
+    .sch-sub { font-size: .78rem; opacity: .85; }
+    .summer-card-body { padding: 1.1rem 1.3rem; }
+    .summer-card-body p { font-size: .87rem; color: var(--text); margin-bottom: .8rem; line-height: 1.6; }
+
+    /* PATHWAY */
+    .pathway { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; margin-bottom: 1.5rem; }
+    .pathway h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 1.2rem; }
+    .timeline { display: flex; gap: 0; align-items: flex-start; flex-wrap: wrap; }
+    .timeline-step { flex: 1; min-width: 140px; position: relative; padding-right: 1.2rem; }
+    .timeline-step:not(:last-child)::after { content: '→'; position: absolute; right: .1rem; top: 9px; color: var(--muted); font-size: 1rem; }
+    .t-circle { width: 28px; height: 28px; border-radius: 50%; background: var(--navy); color: white; font-size: .75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: .5rem; }
+    .t-title { font-weight: 700; font-size: .88rem; color: var(--navy); margin-bottom: .2rem; }
+    .t-desc { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+    /* BOOKS */
+    .subject-group { margin-bottom: 2.2rem; }
+    .subject-tag { display: inline-flex; align-items: center; gap: .5rem; background: var(--navy); color: white; font-weight: 700; font-size: .85rem; padding: .4rem 1.1rem; border-radius: 6px; margin-bottom: 1rem; }
+    .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+    .book-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.3rem; display: flex; gap: .9rem; align-items: flex-start; transition: border-color .2s; }
+    .book-card:hover { border-color: var(--gold); }
+    .book-spine { width: 6px; min-height: 50px; background: var(--gold); border-radius: 3px; flex-shrink: 0; margin-top: 4px; }
+    .book-card .title { font-weight: 700; font-size: .92rem; color: var(--navy); line-height: 1.4; margin-bottom: .25rem; }
+    .book-card .authors { font-size: .82rem; color: var(--muted); margin-bottom: .3rem; }
+    .book-card .pub { font-size: .78rem; color: var(--teal); font-weight: 600; }
+    .book-card a { font-size: .78rem; color: var(--teal); font-weight: 700; text-decoration: none; }
+    .book-card a:hover { text-decoration: underline; }
+
+    /* VIDEOS */
+    .video-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .video-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; gap: .8rem; transition: border-color .2s, box-shadow .2s; }
+    .video-card:hover { border-color: var(--teal); box-shadow: 0 4px 20px rgba(30,122,110,.1); }
+    .yt-icon { width: 40px; height: 40px; background: #ff0000; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem; flex-shrink: 0; }
+    .video-card h3 { font-size: 1rem; font-weight: 700; color: var(--navy); }
+    .video-card p { font-size: .88rem; color: var(--muted); flex: 1; }
+    .resource-link { display: inline-flex; align-items: center; gap: .4rem; color: var(--teal); font-size: .85rem; font-weight: 700; text-decoration: none; border: 1.5px solid var(--teal); border-radius: 6px; padding: .35rem .9rem; transition: all .2s; align-self: flex-start; }
+    .resource-link:hover { background: var(--teal); color: white; }
+
+    .expository-card { background: var(--light-teal); border-left: 5px solid var(--teal); border-radius: 0 10px 10px 0; padding: 1.4rem 1.8rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 1.5rem; }
+    .exp-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .expository-card h3 { font-weight: 700; color: var(--navy); margin-bottom: .3rem; }
+    .expository-card p { font-size: .9rem; color: var(--muted); margin-bottom: .6rem; }
+
+    .cta-strip { background: var(--navy); color: white; border-radius: 14px; padding: 2.5rem; text-align: center; margin-top: 3rem; }
+    .cta-strip h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: .6rem; }
+    .cta-strip p { opacity: .75; margin-bottom: 1.5rem; }
+    .btn { display: inline-block; padding: .75rem 1.8rem; border-radius: 6px; font-weight: 700; text-decoration: none; background: var(--gold); color: var(--navy); transition: background .2s, transform .2s; }
+    .btn:hover { background: #e8b520; transform: translateY(-2px); }
+
+    footer { background: var(--navy); color: rgba(255,255,255,.7); text-align: center; padding: 2rem; font-size: .85rem; }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .fellowship-grid { grid-template-columns: 1fr; }
+      .expository-card { flex-direction: column; gap: .8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">MTTS <span>Overture</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#camps">Camps</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="learning-resources.html" class="active">Resources &amp; Pathways</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="badge">Students &amp; Faculty</div>
+  <h1>Learning <span>Resources</span> &amp; Career Pathways</h1>
+  <p>Textbooks, video lectures, M.Sc. admission guidance, fellowships, and summer school opportunities for mathematics students in India.</p>
+</div>
+
+<div class="tab-nav">
+  <div class="tab-nav-inner">
+    <a class="tab-link active" href="#videos">▶ Video Lectures</a>
+    <a class="tab-link" href="#textbooks">📚 Textbooks</a>
+    <a class="tab-link" href="#summer">☀️ Summer Schools</a>
+    <a class="tab-link" href="#nbhm">🏅 NBHM Fellowship</a>
+    <a class="tab-link" href="#colleges">🏛 Institutes</a>
+    <a class="tab-link" href="#msc-admissions">🎓 M.Sc. Admissions</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ── VIDEO LECTURES (REVERSED: FIRST) ── -->
+  <div class="page-section" id="videos">
+    <div class="section-label">Online Lectures</div>
+    <h2 class="section-title">Prof. S. Kumaresan's Resources</h2>
+    <p class="section-desc">Prof. Kumaresan's expository articles and video lectures are the primary self-learning resources recommended at every Overture camp. Freely accessible.</p>
+
+    <div class="expository-card">
+      <div class="exp-icon">📄</div>
+      <div>
+        <h3>Expository Articles by Prof. S. Kumaresan</h3>
+        <p>A rich collection of carefully written expositions on foundational mathematics topics, freely accessible on the MTTS portal.</p>
+        <a href="https://4dspace.mtts.org.in/ea" target="_blank" class="resource-link">Visit 4dspace.mtts.org.in/ea →</a>
+      </div>
+    </div>
+
+    <div class="video-cards">
+      <div class="video-card">
+        <div class="yt-icon">▶</div>
+        <h3>Kumaresan's YouTube Channel</h3>
+        <p>Extensive video lecture series on real analysis, topology, and foundational mathematics — ideal for self-study alongside or after the camp.</p>
+        <a href="https://www.youtube.com/kumarhcu" target="_blank" class="resource-link">youtube.com/kumarhcu →</a>
+      </div>
+      <div class="video-card">
+        <div class="yt-icon">▶</div>
+        <h3>Curated Video List</h3>
+        <p>A hand-picked list of Kumaresan's most relevant video lectures, organized to complement Overture camp topics and JAM/NBHM preparation.</p>
+        <a href="https://4dspace.mtts.org.in/expository-article-download.php?ai=222" target="_blank" class="resource-link">View the list →</a>
+      </div>
+      <div class="video-card">
+        <div class="yt-icon">▶</div>
+        <h3>MTTS Programme Channel</h3>
+        <p>Official MTTS YouTube channel with lectures, talks, and content from various MTTS programmes across the years.</p>
+        <a href="https://www.youtube.com/c/mttsprogramme" target="_blank" class="resource-link">youtube.com/c/mttsprogramme →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TEXTBOOKS (REVERSED: SECOND) ── -->
+  <div class="page-section" id="textbooks">
+    <div class="section-label">Textbooks</div>
+    <h2 class="section-title">Recommended Textbooks by Subject</h2>
+    <p class="section-desc">A curated list of textbooks covering the core subjects taught at MTTS Overture camps. These are also excellent resources for preparing for JAM, CMI, ISI, and NBHM entrance examinations.</p>
+
+    <div class="subject-group">
+      <div class="subject-tag">📐 Foundations</div>
+      <div class="books-grid">
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">A Foundation Course in Mathematics</div><div class="authors">Ajit Kumar, S. Kumaresan &amp; B.K. Sarma</div><div class="pub">Narosa, 2018</div></div></div>
+      </div>
+    </div>
+
+    <div class="subject-group">
+      <div class="subject-tag">∑ Calculus / Real Analysis</div>
+      <div class="books-grid">
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">A Basic Course in Real Analysis</div><div class="authors">Ajit Kumar &amp; S. Kumaresan</div><div class="pub">CRC Press (Indian reprint)</div></div></div>
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">Introduction to Real Analysis, 4th Ed.</div><div class="authors">R.G. Bartle &amp; D.R. Sherbert</div><div class="pub">Wiley India</div></div></div>
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">Calculus</div><div class="authors">Amber Habib</div><div class="pub">Cambridge University Press, 2022</div></div></div>
+      </div>
+    </div>
+
+    <div class="subject-group">
+      <div class="subject-tag">↗ Linear Algebra</div>
+      <div class="books-grid">
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">Linear Algebra</div><div class="authors">S. Kumaresan</div><div class="pub">Prentice-Hall of India</div></div></div>
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">Linear Algebra: A Modern Introduction, 4th Ed.</div><div class="authors">D. Poole</div><div class="pub">Cengage India</div></div></div>
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">Linear Algebra with Applications (Free PDF)</div><div class="authors">W. Keith Nicholson</div><div class="pub">Lyryx Learning, 2018 — Open Access</div><a href="https://lyryx.com/wp-content/uploads/2018/01/Nicholson-OpenLAWA-2018A.pdf" target="_blank">Download PDF →</a></div></div>
+      </div>
+    </div>
+
+    <div class="subject-group">
+      <div class="subject-tag">⊕ Modern Algebra</div>
+      <div class="books-grid">
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">Contemporary Abstract Algebra, 8th Ed.</div><div class="authors">Joseph A. Gallian</div><div class="pub">Cengage India</div></div></div>
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">A First Course in Abstract Algebra, 7th Ed.</div><div class="authors">John B. Fraleigh</div><div class="pub">Pearson, 2002</div></div></div>
+      </div>
+    </div>
+
+    <div class="subject-group">
+      <div class="subject-tag">dy/dx Differential Equations</div>
+      <div class="books-grid">
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">Differential Equations and Their Applications</div><div class="authors">Martin Braun</div><div class="pub">Springer — Texts in Applied Mathematics</div></div></div>
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">Differential Equations (Free PDF)</div><div class="authors">Marcel B. Finan</div><div class="pub">Arkansas Tech University</div><a href="https://faculty.atu.edu/mfinan/3243/DFQ2015.pdf" target="_blank">Download PDF →</a></div></div>
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">Differential Equations (with large problem set, Free)</div><div class="authors">William F. Trench</div><div class="pub">Trinity University</div><a href="http://ramanujan.math.trinity.edu/wtrench/texts/TRENCH_DIFF_EQNS_I.PDF" target="_blank">Download PDF →</a></div></div>
+      </div>
+    </div>
+
+    <div class="subject-group">
+      <div class="subject-tag">○ Metric Spaces &amp; Topology</div>
+      <div class="books-grid">
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">Topology of Metric Spaces, 2nd Ed.</div><div class="authors">S. Kumaresan</div><div class="pub">Narosa Publishing House, 2011</div></div></div>
+      </div>
+    </div>
+
+    <div class="subject-group">
+      <div class="subject-tag">ℂ Complex Analysis</div>
+      <div class="books-grid">
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">A Pathway to Complex Analysis</div><div class="authors">S. Kumaresan</div><div class="pub">Techno World, 2022</div></div></div>
+      </div>
+    </div>
+
+    <div class="subject-group">
+      <div class="subject-tag">≈ Numerical Analysis</div>
+      <div class="books-grid">
+        <div class="book-card"><div class="book-spine"></div><div><div class="title">Numerical Analysis, 9th Ed. (Free PDF)</div><div class="authors">Richard L. Burden &amp; J. Douglas Faires</div><div class="pub">Cengage Learning, 2010</div><a href="https://faculty.ksu.edu.sa/sites/default/files/numerical_analysis_9th.pdf" target="_blank">Download PDF →</a></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SUMMER SCHOOLS (REVERSED: THIRD) ── -->
+  <div class="page-section" id="summer">
+    <div class="section-label">Immersive Learning Experiences</div>
+    <h2 class="section-title">Summer Schools &amp; Research Programmes</h2>
+    <p class="section-desc">Summer schools and research internship programmes offer undergraduate students a chance to experience mathematics research, interact with leading mathematicians, and build their academic network. Most programmes provide travel, accommodation, and a stipend.</p>
+
+    <div class="summer-grid">
+      <div class="summer-card">
+        <div class="sch mtts">
+          <div class="sch-h">MTTS Annual Summer Camp</div>
+          <div class="sch-sub">Mathematics Training and Talent Search Programme · Various IITs/IISERs</div>
+        </div>
+        <div class="summer-card-body">
+          <p>The flagship MTTS Summer Camp is a 3–4 week intensive residential camp held every May–June at multiple centres across India. Designed for B.Sc. students, it offers courses in Algebra, Analysis, Topology, and more — following the distinctive MTTS inquiry-based methodology. Fully residential with travel and board support.</p>
+          <div class="tag-row"><span class="tag gold">3–4 weeks · May–June</span><span class="tag gold">B.Sc. 1st–3rd Year</span><span class="tag gold">Fully Residential</span></div>
+          <a href="https://mtts.org.in/training-programmes/mtts" target="_blank" class="resource-link">MTTS Programme →</a>
+        </div>
+      </div>
+
+      <div class="summer-card">
+        <div class="sch tifr">
+          <div class="sch-h">TIFR Summer Programme</div>
+          <div class="sch-sub">Tata Institute of Fundamental Research, Mumbai</div>
+        </div>
+        <div class="summer-card-body">
+          <p>TIFR conducts annual summer programmes introducing talented students to research in Mathematics, Physics, Chemistry, CS, and Astronomy. The School of Mathematics at TIFR offers research internships for students to work with faculty. Stipend, travel, and accommodation are typically provided.</p>
+          <div class="tag-row"><span class="tag blue">B.Sc./M.Sc. students</span><span class="tag blue">May–July</span><span class="tag blue">Stipend + Travel</span></div>
+          <a href="https://www.tifr.res.in/academics/summer_program.php" target="_blank" class="resource-link">TIFR Summer →</a>
+        </div>
+      </div>
+
+      <div class="summer-card">
+        <div class="sch icts">
+          <div class="sch-h">ICTS Summer Research Programme</div>
+          <div class="sch-sub">International Centre for Theoretical Sciences, Bengaluru</div>
+        </div>
+        <div class="summer-card-body">
+          <p>ICTS-TIFR offers a summer research programme for UG and PG students in mathematics. ICTS also hosts the <strong>Summer School for Women in Mathematics and Statistics</strong> — a two-week residential school for first-year B.Sc./B.Tech. women students, covering problem-solving skills in mathematics and statistics. Travel, board, and a performance-based book stipend are provided.</p>
+          <div class="tag-row"><span class="tag teal">UG &amp; PG students</span><span class="tag teal">Women's school available</span><span class="tag teal">Travel + Board supported</span></div>
+          <a href="https://www.icts.res.in/academic/summer-research-program" target="_blank" class="resource-link">ICTS Summer →</a>
+        </div>
+      </div>
+
+      <div class="summer-card">
+        <div class="sch hri">
+          <div class="sch-h">SPIM — Summer Programme in Mathematics</div>
+          <div class="sch-sub">Harish-Chandra Research Institute (HRI), Prayagraj</div>
+        </div>
+        <div class="summer-card-body">
+          <p>HRI's SPIM is designed to introduce Master's-level mathematics to highly motivated undergraduates and first-year postgraduates. The programme features intensive lectures on Algebra, Analysis, and related areas — very similar in spirit to MTTS camps but focused on slightly more advanced material.</p>
+          <div class="tag-row"><span class="tag purple">UG final year / 1st yr PG</span><span class="tag purple">Fully Residential (~4 weeks)</span></div>
+          <a href="https://www.hri.res.in/academics/mathematics/math-vsp/" target="_blank" class="resource-link">HRI SPIM →</a>
+        </div>
+      </div>
+
+      <div class="summer-card">
+        <div class="sch imsc">
+          <div class="sch-h">IMSc Summer Research Programme</div>
+          <div class="sch-sub">Institute of Mathematical Sciences, Chennai</div>
+        </div>
+        <div class="summer-card-body">
+          <p>IMSc selects about 25 students across disciplines annually for 6–8 week summer research visits (May–July). Extended 4–6 month visits (Jan–Apr or Aug–Nov) are also possible. Students work directly with IMSc faculty on research problems in mathematics, theoretical computer science, or physics.</p>
+          <div class="tag-row"><span class="tag red">~25 students selected</span><span class="tag red">6–8 weeks</span><span class="tag red">Research-focused</span></div>
+          <a href="https://www.imsc.res.in/summer_research_programme" target="_blank" class="resource-link">IMSc Summer →</a>
+        </div>
+      </div>
+
+      <div class="summer-card">
+        <div class="sch cam">
+          <div class="sch-h">TIFR-CAM Summer Research Programme</div>
+          <div class="sch-sub">TIFR Centre for Applicable Mathematics, Bengaluru</div>
+        </div>
+        <div class="summer-card-body">
+          <p>TIFR-CAM offers summer internships to UG and graduate students to work with faculty on pure and applied mathematics research projects. Students present their work and write a project report. Stipend of ₹9,000/month and sleeper-class train fare provided. Accommodation not provided — students arrange independently.</p>
+          <div class="tag-row"><span class="tag green">₹9,000/month stipend</span><span class="tag green">Train fare reimbursed</span><span class="tag green">UG &amp; PG students</span></div>
+          <a href="https://www.math.tifrbng.res.in/en/academic/internships" target="_blank" class="resource-link">TIFR-CAM →</a>
+        </div>
+      </div>
+
+      <div class="summer-card">
+        <div class="sch atm">
+          <div class="sch-h">ATM Schools — Advanced Training in Mathematics</div>
+          <div class="sch-sub">National Centre for Mathematics (NCM) · Various centres across India</div>
+        </div>
+        <div class="summer-card-body">
+          <p>ATM (Advanced Training in Mathematics) Schools are intensive short programmes for advanced students and young researchers, organised across India through the National Centre for Mathematics. They cover topics from Algebra, Differential Geometry, Number Theory, Topology, and more at an advanced level. Accommodation and travel support are typically provided.</p>
+          <div class="tag-row"><span class="tag blue">Advanced UG / PG students</span><span class="tag blue">Multiple centres India-wide</span><span class="tag blue">Travel + accommodation</span></div>
+          <a href="http://www.atmschools.org/" target="_blank" class="resource-link">ATM Schools →</a>
+        </div>
+      </div>
+
+      <div class="summer-card">
+        <div class="sch init">
+          <div class="sch-h">InitMath — Initiation into Mathematics</div>
+          <div class="sch-sub">MTTS Trust · Regional centres across India</div>
+        </div>
+        <div class="summer-card-body">
+          <p>A sister programme to MTTS Overture, InitMath camps are short residential workshops (5–7 days) held at various regional centres — especially in geographically disadvantaged areas — for 1st and 2nd year B.Sc. students. A great first step into the MTTS ecosystem before the Overture and Summer Camp.</p>
+          <div class="tag-row"><span class="tag blue">1st &amp; 2nd year B.Sc.</span><span class="tag blue">5–7 days residential</span><span class="tag blue">Regional centres</span></div>
+          <a href="https://mtts.org.in/training-programmes/initmath" target="_blank" class="resource-link">InitMath →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── NBHM FELLOWSHIP (REVERSED: FOURTH) ── -->
+  <div class="page-section" id="nbhm">
+    <div class="section-label">Financial Support for Mathematicians</div>
+    <h2 class="section-title">NBHM Scholarships &amp; Fellowship</h2>
+    <p class="section-desc">The National Board for Higher Mathematics (NBHM), under the Department of Atomic Energy, Government of India, offers prestigious scholarships to outstanding mathematics students at both the Master's and Doctoral levels. The same national written test (held in January each year) serves both schemes.</p>
+
+    <div class="fellowship-grid">
+      <div class="fellowship-card">
+        <div class="fellowship-header">
+          <div class="f-icon">🎓</div>
+          <div>
+            <div class="f-title">NBHM Master's Scholarship</div>
+            <div class="f-org">National Board for Higher Mathematics · Dept. of Atomic Energy, Govt. of India</div>
+          </div>
+        </div>
+        <div class="stipend-box">
+          <div class="stipend-item"><div class="stipend-amt">₹8,000</div><div class="stipend-lbl">Per month stipend</div></div>
+          <div class="stipend-item"><div class="stipend-amt">2 years</div><div class="stipend-lbl">Maximum tenure</div></div>
+        </div>
+        <p><strong>Eligibility:</strong> Indian nationals enrolled or enrolling in the first year of an M.Sc. in Mathematics or Statistics at a recognised full-time programme. Bachelor's degree in Mathematics or related field required. Part-time or correspondence courses are not eligible.</p>
+        <p><strong>Key rule:</strong> Each person can receive this scholarship only once. If already in 2nd year of M.Sc. during the award year, tenure is limited to 1 year.</p>
+        <div class="tag-row">
+          <span class="tag purple">Written Test in January</span>
+          <span class="tag purple">Interview (after shortlisting)</span>
+          <span class="tag green">No prescribed syllabus</span>
+          <span class="tag gold">No application fee</span>
+        </div>
+        <p><strong>Bonus:</strong> NBHM test scores are also used for M.Sc./Ph.D./Integrated Ph.D. admissions at IISER Pune, HRI, IMSc, KSoM, NISER and other premier institutes — so appearing in this test opens multiple doors even beyond the scholarship itself.</p>
+        <a href="https://www.imsc.res.in/~nbhm/" target="_blank" class="exam-link">NBHM Official Page →</a>
+      </div>
+
+      <div class="fellowship-card">
+        <div class="fellowship-header">
+          <div class="f-icon">🔬</div>
+          <div>
+            <div class="f-title">NBHM Doctoral (Ph.D.) Scholarship</div>
+            <div class="f-org">National Board for Higher Mathematics · Dept. of Atomic Energy, Govt. of India</div>
+          </div>
+        </div>
+        <div class="stipend-box">
+          <div class="stipend-item"><div class="stipend-amt">₹37K</div><div class="stipend-lbl">Per month (first 2 years)</div></div>
+          <div class="stipend-item"><div class="stipend-amt">₹42K</div><div class="stipend-lbl">Per month (years 3–5)</div></div>
+          <div class="stipend-item"><div class="stipend-amt">₹40K</div><div class="stipend-lbl">Annual contingency grant</div></div>
+        </div>
+        <p><strong>Eligibility:</strong> Indian nationals with an M.Sc. in Mathematics, Physics, or Statistics, enrolled or planning to enrol in a Ph.D. in any branch of mathematics (including mathematical statistics and mathematical physics) at any recognised Indian university or research institution.</p>
+        <p><strong>Duration:</strong> Up to 5 years total (initially 1 year, renewable on satisfactory progress). Cannot hold other major fellowships simultaneously.</p>
+        <p><strong>Scope of research:</strong> Any area of mathematics — pure, applied, or mathematical physics — is eligible. The tenable institution must be an Indian university or research institution outside the DAE-aided institutes.</p>
+        <div class="tag-row">
+          <span class="tag purple">Same written test as Master's (January)</span>
+          <span class="tag green">Valid at any Indian university</span>
+          <span class="tag gold">Up to 5 years tenure</span>
+        </div>
+        <a href="https://nbhm.dae.gov.in/" target="_blank" class="exam-link">NBHM Website →</a>
+      </div>
+    </div>
+
+    <div style="background:var(--light-gold);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:1.2rem 1.5rem;margin-top:1.5rem;">
+      <strong style="color:var(--navy);">💡 About the NBHM Test:</strong>
+      <span style="font-size:.95rem;color:var(--text);"> There is no prescribed syllabus — questions are drawn from standard undergraduate and early postgraduate mathematics. Previous year papers with answer keys are freely available on the NBHM portal. The test serves both the Master's and Doctoral scholarship programmes, and a single application can opt for both. Candidates are shortlisted based on test scores and then called for an online interview. The test is held on a Saturday in late January each year; applications open in early December.</span>
+    </div>
+  </div>
+
+  <!-- ── INSTITUTES (REVERSED: FIFTH) ── -->
+  <div class="page-section" id="colleges">
+    <div class="section-label">Where to Study</div>
+    <h2 class="section-title">Notable Institutes for Mathematics in India</h2>
+    <p class="section-desc">A curated list of premier institutions where mathematics students can pursue M.Sc. or Ph.D. programmes. The entrance route varies — check each institute's website for current admission details.</p>
+    <div class="colleges-intro">
+      🔑 Colour key: <span style="color:var(--red);font-weight:800;">● IIT/IISc (JAM route)</span> &nbsp;
+      <span style="color:var(--teal);font-weight:800;">● IISER/NISER (IAT/JAM)</span> &nbsp;
+      <span style="color:var(--purple);font-weight:800;">● Central Universities (CUET-PG)</span> &nbsp;
+      <span style="color:#8a5c00;font-weight:800;">● Special Institutes (Own Exam / NBHM)</span>
+    </div>
+    <div class="college-grid">
+      <div class="college-card"><div class="college-dot special"></div><div><div class="college-name">Chennai Mathematical Institute (CMI)</div><div class="college-detail">Siruseri, Chennai, Tamil Nadu</div><div class="college-exam">Own entrance exam (May) · M.Sc. Mathematics &amp; Ph.D.</div></div></div>
+      <div class="college-card"><div class="college-dot special"></div><div><div class="college-name">Indian Statistical Institute (ISI)</div><div class="college-detail">Kolkata · Delhi · Bengaluru · Chennai · Tezpur</div><div class="college-exam">Own ISI test (May) + Interview · M.Math, M.Stat, Ph.D.</div></div></div>
+      <div class="college-card"><div class="college-dot special"></div><div><div class="college-name">TIFR — School of Mathematics</div><div class="college-detail">Mumbai, Maharashtra</div><div class="college-exam">TIFR GS exam · Integrated Ph.D. programme</div></div></div>
+      <div class="college-card"><div class="college-dot special"></div><div><div class="college-name">Harish-Chandra Research Institute (HRI)</div><div class="college-detail">Prayagraj, Uttar Pradesh</div><div class="college-exam">NBHM test score · Integrated Ph.D. Mathematics &amp; CS</div></div></div>
+      <div class="college-card"><div class="college-dot special"></div><div><div class="college-name">Institute of Mathematical Sciences (IMSc)</div><div class="college-detail">Chennai, Tamil Nadu</div><div class="college-exam">NBHM / CSIR-NET (top 30 ranks) · Ph.D. &amp; Integrated Ph.D.</div></div></div>
+      <div class="college-card"><div class="college-dot special"></div><div><div class="college-name">Kerala School of Mathematics (KSoM)</div><div class="college-detail">Kozhikode, Kerala</div><div class="college-exam">NBHM test · Ph.D. programme</div></div></div>
+      <div class="college-card"><div class="college-dot iit"></div><div><div class="college-name">IIT Bombay</div><div class="college-detail">Mumbai, Maharashtra</div><div class="college-exam">JAM · M.Sc. Mathematics</div></div></div>
+      <div class="college-card"><div class="college-dot iit"></div><div><div class="college-name">IIT Delhi</div><div class="college-detail">New Delhi</div><div class="college-exam">JAM · M.Sc. Mathematics</div></div></div>
+      <div class="college-card"><div class="college-dot iit"></div><div><div class="college-name">IIT Madras</div><div class="college-detail">Chennai, Tamil Nadu</div><div class="college-exam">JAM · M.Sc. Mathematics</div></div></div>
+      <div class="college-card"><div class="college-dot iit"></div><div><div class="college-name">IIT Kanpur</div><div class="college-detail">Kanpur, Uttar Pradesh</div><div class="college-exam">JAM · M.Sc. Mathematics</div></div></div>
+      <div class="college-card"><div class="college-dot iit"></div><div><div class="college-name">IIT Kharagpur</div><div class="college-detail">Kharagpur, West Bengal</div><div class="college-exam">JAM · M.Sc. Mathematics</div></div></div>
+      <div class="college-card"><div class="college-dot iit"></div><div><div class="college-name">IIT Guwahati</div><div class="college-detail">Guwahati, Assam</div><div class="college-exam">JAM · M.Sc. Mathematics &amp; Computing</div></div></div>
+      <div class="college-card"><div class="college-dot iit"></div><div><div class="college-name">IISc Bangalore</div><div class="college-detail">Bengaluru, Karnataka</div><div class="college-exam">JAM / TIFR GS · Integrated Ph.D. Mathematics</div></div></div>
+      <div class="college-card"><div class="college-dot iiser"></div><div><div class="college-name">IISER Pune</div><div class="college-detail">Pune, Maharashtra</div><div class="college-exam">Own campus test (Apr) / JAM / NBHM · M.Sc. Mathematics</div></div></div>
+      <div class="college-card"><div class="college-dot iiser"></div><div><div class="college-name">IISER Kolkata</div><div class="college-detail">Mohanpur, West Bengal</div><div class="college-exam">Own test · M.Sc. Mathematics</div></div></div>
+      <div class="college-card"><div class="college-dot iiser"></div><div><div class="college-name">IISER Bhopal</div><div class="college-detail">Bhopal, Madhya Pradesh</div><div class="college-exam">JAM / CCMN · M.Sc. Mathematics</div></div></div>
+      <div class="college-card"><div class="college-dot iiser"></div><div><div class="college-name">NISER Bhubaneswar</div><div class="college-detail">Bhubaneswar, Odisha</div><div class="college-exam">NEST exam · Integrated M.Sc.–Ph.D.</div></div></div>
+      <div class="college-card"><div class="college-dot central"></div><div><div class="college-name">University of Hyderabad</div><div class="college-detail">Hyderabad, Telangana</div><div class="college-exam">CUET-PG · M.Sc. Mathematics (strong research dept.)</div></div></div>
+      <div class="college-card"><div class="college-dot central"></div><div><div class="college-name">Delhi University (DU)</div><div class="college-detail">New Delhi</div><div class="college-exam">CUET-PG · M.Sc. Mathematics (very competitive cutoff)</div></div></div>
+      <div class="college-card"><div class="college-dot central"></div><div><div class="college-name">Banaras Hindu University (BHU)</div><div class="college-detail">Varanasi, Uttar Pradesh</div><div class="college-exam">CUET-PG · M.Sc. Mathematics</div></div></div>
+      <div class="college-card"><div class="college-dot central"></div><div><div class="college-name">Jawaharlal Nehru University (JNU)</div><div class="college-detail">New Delhi</div><div class="college-exam">CUET-PG · M.Sc. Mathematics</div></div></div>
+      <div class="college-card"><div class="college-dot central"></div><div><div class="college-name">University of Allahabad</div><div class="college-detail">Prayagraj, Uttar Pradesh</div><div class="college-exam">CUET-PG · M.Sc. Mathematics (historic institution)</div></div></div>
+    </div>
+  </div>
+
+  <!-- ── M.Sc. ADMISSIONS (REVERSED: SIXTH / LAST) ── -->
+  <div class="page-section" id="msc-admissions">
+    <div class="section-label">Higher Education Pathways</div>
+    <h2 class="section-title">M.Sc. Admission Examinations</h2>
+    <p class="section-desc">For undergraduate mathematics students looking to pursue postgraduate education, these national-level entrance examinations are your primary gateways. Each exam opens doors to different sets of prestigious institutions.</p>
+
+    <!-- JAM -->
+    <div class="exam-card">
+      <div class="exam-header">
+        <div class="exam-icon jam">🔬</div>
+        <div>
+          <div class="exam-title">IIT JAM — Joint Admission Test for M.Sc.</div>
+          <div class="exam-subtitle">Conducted by IITs on a rotational basis · Computer-Based Test</div>
+        </div>
+      </div>
+      <div class="exam-body">
+        <p>IIT JAM is the premier national entrance exam for admission to M.Sc., M.Sc.–Ph.D. Dual Degree, and Integrated Ph.D. programmes at all IITs and IISc. It is conducted once a year, usually in February, and is the most sought-after exam for mathematics postgraduates. About 13,000–14,000 candidates appear in the Mathematics paper annually.</p>
+        <div class="info-grid">
+          <div class="info-pill"><div class="lbl">Conducting Body</div><div class="val">IITs (rotational)</div></div>
+          <div class="info-pill"><div class="lbl">Exam Mode</div><div class="val">Computer-Based (CBT)</div></div>
+          <div class="info-pill"><div class="lbl">Exam Month</div><div class="val">February each year</div></div>
+          <div class="info-pill"><div class="lbl">Apply By</div><div class="val">September–October</div></div>
+          <div class="info-pill"><div class="lbl">Mathematics Paper</div><div class="val">MA (Mathematics)</div></div>
+          <div class="info-pill"><div class="lbl">No. of Attempts</div><div class="val">Unlimited</div></div>
+        </div>
+        <div class="tag-row">
+          <span class="tag red">All 21 IITs</span>
+          <span class="tag blue">IISc Bangalore</span>
+          <span class="tag gold">NITs via CCMN</span>
+          <span class="tag teal">M.Sc. · M.Sc.–Ph.D. Dual · Integrated Ph.D.</span>
+        </div>
+        <p><strong>Eligibility:</strong> Bachelor's degree in any discipline from a recognised university. At least 55% aggregate (50% for SC/ST/PwD). No age limit. No limit on number of attempts.</p>
+        <p><strong>Paper pattern:</strong> MCQ + MSQ (Multiple Select) + NAT (Numerical Answer Type). Negative marking only for MCQs. Duration: 3 hours.</p>
+        <p><strong>Mathematics syllabus covers:</strong> Real Analysis (sequences, continuity, integration), Linear Algebra, Group Theory, Differential Equations, Vector Calculus, Complex Analysis basics.</p>
+        <p><strong>Tip for MTTS students:</strong> The MTTS Overture covers Analysis and Algebra — both are core JAM topics. The MTTS approach of understanding from first principles is exactly what JAM tests. Practise previous year papers from the official JAM portal.</p>
+        <a href="https://jam.iitb.ac.in" target="_blank" class="exam-link">Official JAM Website →</a>
+      </div>
+    </div>
+
+    <!-- CUET PG -->
+    <div class="exam-card">
+      <div class="exam-header">
+        <div class="exam-icon cuet">📝</div>
+        <div>
+          <div class="exam-title">CUET-PG — Common University Entrance Test (Postgraduate)</div>
+          <div class="exam-subtitle">Conducted by NTA · Gateway to Central and State Universities</div>
+        </div>
+      </div>
+      <div class="exam-body">
+        <p>CUET-PG is conducted by the National Testing Agency (NTA) and serves as the common entrance for postgraduate programmes (including M.Sc. Mathematics) at Central Universities, State Universities, and many other participating institutions across India. Around 2.5 lakh candidates appear for M.Sc. courses through CUET-PG annually. This is the route into most central universities if you are not targeting IITs.</p>
+        <div class="info-grid">
+          <div class="info-pill"><div class="lbl">Conducting Body</div><div class="val">NTA</div></div>
+          <div class="info-pill"><div class="lbl">Exam Mode</div><div class="val">Computer-Based (CBT)</div></div>
+          <div class="info-pill"><div class="lbl">Exam Period</div><div class="val">March–April</div></div>
+          <div class="info-pill"><div class="lbl">Duration</div><div class="val">90 minutes</div></div>
+          <div class="info-pill"><div class="lbl">Questions</div><div class="val">75 MCQs</div></div>
+          <div class="info-pill"><div class="lbl">Marking</div><div class="val">+4 correct / –1 wrong</div></div>
+        </div>
+        <div class="tag-row">
+          <span class="tag purple">Delhi University</span>
+          <span class="tag purple">JNU</span>
+          <span class="tag purple">BHU Varanasi</span>
+          <span class="tag purple">Hyderabad University</span>
+          <span class="tag purple">All 45+ Central Universities</span>
+          <span class="tag blue">Many State Universities</span>
+        </div>
+        <p><strong>Eligibility:</strong> A Bachelor's degree in Mathematics (or related field) from a recognised university. Minimum 50% aggregate (45% for SC/ST) for most universities.</p>
+        <p><strong>Important:</strong> Unlike JAM, each university runs its own counselling and merit list after results. Apply to the CUET-PG exam first, then apply separately to each university you wish to join during their counselling window.</p>
+        <a href="https://exams.nta.nic.in/cuet-pg/" target="_blank" class="exam-link">Official CUET-PG Website →</a>
+      </div>
+    </div>
+
+    <!-- CMI -->
+    <div class="exam-card">
+      <div class="exam-header">
+        <div class="exam-icon cmi">∑</div>
+        <div>
+          <div class="exam-title">CMI Entrance Exam — Chennai Mathematical Institute</div>
+          <div class="exam-subtitle">One of India's finest mathematics institutions · Pen &amp; Paper</div>
+        </div>
+      </div>
+      <div class="exam-body">
+        <p>CMI is one of India's finest institutions for mathematics, with strong international connections. Admission is through CMI's own entrance exam — known for its emphasis on deep mathematical thinking and proof-writing, not rote learning. CMI alumni regularly go on to top global universities including MIT, Princeton, Stanford, Harvard, and top Indian institutes like IITs, IISc, IMSc, and TIFR.</p>
+        <div class="info-grid">
+          <div class="info-pill"><div class="lbl">Exam Mode</div><div class="val">Pen &amp; Paper (Offline)</div></div>
+          <div class="info-pill"><div class="lbl">Exam Month</div><div class="val">May each year</div></div>
+          <div class="info-pill"><div class="lbl">Apply By</div><div class="val">March–April</div></div>
+          <div class="info-pill"><div class="lbl">Duration (M.Sc.)</div><div class="val">3 hours</div></div>
+          <div class="info-pill"><div class="lbl">Programmes</div><div class="val">M.Sc. Mathematics, CS, Ph.D.</div></div>
+          <div class="info-pill"><div class="lbl">Application Fee</div><div class="val">₹1,000</div></div>
+        </div>
+        <div class="tag-row">
+          <span class="tag gold">M.Sc. Mathematics</span>
+          <span class="tag gold">M.Sc. Computer Science</span>
+          <span class="tag gold">Ph.D. Mathematics</span>
+        </div>
+        <p><strong>Exam Pattern:</strong> Part A — 10 objective questions (40 marks, used for screening); Part B — 6 long-answer/proof-based questions (80 marks). Emphasis on logical reasoning and mathematical creativity.</p>
+        <p><strong>Eligibility:</strong> Bachelor's degree (BA, B.Sc., B.Math., B.Stat., B.E., B.Tech.) from a recognised institution with Mathematics. INMO / National Olympiad awardees may get direct admission.</p>
+        <p><strong>Tip:</strong> CMI tests the kind of mathematical understanding cultivated in MTTS camps — not computation but insight. Study Real Analysis, Abstract Algebra, Linear Algebra, Combinatorics, and Number Theory from first principles.</p>
+        <a href="https://www.cmi.ac.in/admissions/" target="_blank" class="exam-link">CMI Admissions →</a>
+      </div>
+    </div>
+
+    <!-- ISI -->
+    <div class="exam-card">
+      <div class="exam-header">
+        <div class="exam-icon isi">📊</div>
+        <div>
+          <div class="exam-title">ISI Admission Test — Indian Statistical Institute</div>
+          <div class="exam-subtitle">Premier institute for Mathematics &amp; Statistics · Offline exam + Interview</div>
+        </div>
+      </div>
+      <div class="exam-body">
+        <p>ISI is one of India's most prestigious institutions for mathematical and statistical sciences, with campuses in Kolkata, Delhi, Bengaluru, Chennai, and Tezpur. The M.Math (Master of Mathematics) programme is extremely rigorous and a direct path to research careers. Admitted students receive a monthly stipend.</p>
+        <div class="info-grid">
+          <div class="info-pill"><div class="lbl">Exam Mode</div><div class="val">Offline — Objective + Subjective</div></div>
+          <div class="info-pill"><div class="lbl">Exam Month</div><div class="val">May each year</div></div>
+          <div class="info-pill"><div class="lbl">M.Math Stipend</div><div class="val">₹8,000/month</div></div>
+          <div class="info-pill"><div class="lbl">Eligibility</div><div class="val">3-yr B.Sc./B.Tech. with Mathematics</div></div>
+          <div class="info-pill"><div class="lbl">Campuses</div><div class="val">Kolkata · Delhi · Bengaluru · Chennai · Tezpur</div></div>
+        </div>
+        <div class="tag-row">
+          <span class="tag green">M.Math (Master of Mathematics)</span>
+          <span class="tag green">M.Stat (Master of Statistics)</span>
+          <span class="tag blue">Ph.D. Mathematics</span>
+        </div>
+        <p><strong>Exam Pattern (M.Math):</strong> Paper 1 — objective MCQs; Paper 2 — descriptive/subjective. No negative marking. Shortlisted candidates are called for an interview. Topics: Real Analysis, Algebra, Linear Algebra, Probability.</p>
+        <p><strong>Key benefit:</strong> Admitted M.Math students receive ₹8,000/month stipend. INMO awardees (IMOTC participants) are exempted from the written test — up to 5 supernumerary seats.</p>
+        <a href="https://www.isical.ac.in/admission" target="_blank" class="exam-link">ISI Admissions →</a>
+      </div>
+    </div>
+
+    <!-- IISER -->
+    <div class="exam-card">
+      <div class="exam-header">
+        <div class="exam-icon iiser">🔭</div>
+        <div>
+          <div class="exam-title">IISER M.Sc. — Indian Institutes of Science Education and Research</div>
+          <div class="exam-subtitle">IISERs across India · JAM / NBHM / Own test depending on IISER</div>
+        </div>
+      </div>
+      <div class="exam-body">
+        <p>Multiple IISERs now offer M.Sc. programmes in Mathematics. These are premier research-intensive institutes. Admission pathways vary by IISER — some accept JAM scores, others accept NBHM test scores, and some conduct their own written tests followed by an interview on campus.</p>
+        <div class="info-grid">
+          <div class="info-pill"><div class="lbl">Institutes Offering M.Sc.</div><div class="val">Pune · Kolkata · Bhopal · Mohali · Tirupati · TVM · Berhampur</div></div>
+          <div class="info-pill"><div class="lbl">Minimum Eligibility</div><div class="val">B.Sc. with ≥60% aggregate</div></div>
+          <div class="info-pill"><div class="lbl">Qualifying Exams</div><div class="val">JAM / NBHM / Own exam</div></div>
+        </div>
+        <div class="tag-row">
+          <span class="tag teal">IISER Pune — own MCQ test on campus</span>
+          <span class="tag teal">IISER Kolkata — own test</span>
+          <span class="tag teal">IISER Bhopal — JAM/CCMN route</span>
+        </div>
+        <p><strong>IISER Pune M.Sc. Mathematics:</strong> Candidates encouraged to have appeared in NBHM Master's written test or JAM. Selection is through an MCQ-based admission test held at IISER Pune campus (April), followed by merit listing. Apply by March each year.</p>
+        <a href="https://www.iiserpune.ac.in/research/department/mathematics/admissions" target="_blank" class="exam-link">IISER Pune M.Sc. Admissions →</a>
+      </div>
+    </div>
+
+    <!-- PATHWAY TIMELINE -->
+    <div class="pathway">
+      <h3>📍 Typical M.Sc. Preparation Timeline (for 2nd / 3rd year B.Sc. students)</h3>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="t-circle">1</div>
+          <div class="t-title">2nd Year B.Sc.</div>
+          <div class="t-desc">Attend MTTS Overture or InitMath. Build strong foundation in Analysis &amp; Algebra. Study Kumaresan's expository articles.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="t-circle">2</div>
+          <div class="t-title">3rd Year (Sep–Oct)</div>
+          <div class="t-desc">Register for JAM (Feb exam). Register for NBHM test (Jan exam). Apply for summer programmes at TIFR, IMSc, HRI.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="t-circle">3</div>
+          <div class="t-title">Final Year (Jan–May)</div>
+          <div class="t-desc">Write NBHM test (Jan). Write JAM (Feb). Apply for CMI &amp; ISI (Mar–Apr). Appear for CUET-PG (Mar–Apr). Write IISER campus tests (Apr).</div>
+        </div>
+        <div class="timeline-step">
+          <div class="t-circle">4</div>
+          <div class="t-title">After Results (Jun–Jul)</div>
+          <div class="t-desc">Accept M.Sc. offer. Also consider integrated Ph.D. at HRI / IMSc / IISERs / TIFR if interested in research directly.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-strip">
+    <h3>Interested in Hosting an Overture Camp?</h3>
+    <p>Bring the MTTS learning experience to your institution and your region's students.</p>
+    <a href="https://4dspace.mtts.org.in/otp-login.php?login_mode=ovrp" target="_blank" class="btn">Apply via MTTS Portal →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>MTTS Overture — organized by <a href="https://mtts.org.in" target="_blank">MTTS Trust</a> · Contact: <a href="mailto:overture.mtts@gmail.com">overture.mtts@gmail.com</a></p>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.page-section');
+  const tabLinks = document.querySelectorAll('.tab-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) current = s.id; });
+    tabLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+  });
+</script>
+</body>
+</html>
